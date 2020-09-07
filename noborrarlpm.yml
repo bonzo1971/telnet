@@ -1,0 +1,18 @@
+- name: configure acl commands
+  hosts: ios
+  gather_facts: False
+  connection: local
+  tasks:
+    - telnet:
+        user: rancid
+        password: bay18reuth48
+        login_prompt: ": "
+        password_prompt: ": "
+        prompts:
+          - "[>|#]"
+        command:
+          - terminal length 0
+          - show version
+      register: output
+    - debug:
+        msg: "{{ output }}"
